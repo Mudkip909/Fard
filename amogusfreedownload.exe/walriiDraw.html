@@ -1,0 +1,123 @@
+    <html>
+        <head>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+            <script type="text/javascript" src="https://static.codehs.com/gulp/80550f5fc4071985bfef352d04f005ca3de931d3/chs-js-lib/chs.js"></script>
+            <style>
+                canvas {
+                    
+black;
+                    display: inline-block;
+                    vertical-align: top;
+                }
+                pre {
+                    border: 1px solid 
+black;
+                    display: inline-block;
+                    width: 400px;
+                    height: 500px;
+                    background-color: 
+#F5F5F5;
+                }
+            </style>
+    </head>
+    <body>
+        <h1>WalriiDraw</h1>
+        <canvas
+        width="1920"
+        height="1080"
+        class="codehs-editor-canvas"></canvas>
+        
+
+        <script>
+		//Hello code snooper, heres the guts, i used codehs because i was familiar with its graphics syntax...This code is terribly inefficient.
+            window.onload = function() {
+                var walriiCursor = new WebImage("https://codehs.com/uploads/b5b8b7afa11ab5a389e3492a227141cf");
+				var txt = new Text("Click to draw (can get loud, turn down volume)", "10pt Arial");
+				txt.setPosition(0, 20);
+				add(txt);
+				var txt2 = new Text("W/S scale, X clear, M mute (Muted by default)", "10pt Arial");
+				txt2.setPosition(0, 40);
+				add(txt2);
+				var x = 0;
+				var y = 0;
+				var size = 0;
+				var mute = 1;
+
+				function start() {
+					mouseDownMethod(move0);
+					mouseDragMethod(move);
+					mouseMoveMethod(move2);
+					keyDownMethod(keyDown);
+				}
+
+				function move0(e) {
+					x = e.getX();
+					y = e.getY();
+					var walrii = new WebImage("https://codehs.com/uploads/59fb6e32954344d495e141245ae3e200");
+					walrii.setPosition(x -(48 + size/2), y - (48 + size/2));
+					walrii.setSize(size + 100,size + 100);
+					add(walrii);
+					
+					if (mute == 0) {
+						var sound = new Audio("https://codehs.com/uploads/63140f32aedb66af880d44225e9abcdd");
+						sound.play();
+					}
+				}
+
+				function move(e) {
+					x = e.getX();
+					y = e.getY();
+					var walrii = new WebImage("https://codehs.com/uploads/59fb6e32954344d495e141245ae3e200");
+					walrii.setPosition(x -(48 + size/2), y - (48 + size/2));
+					walrii.setSize(size + 100,size + 100);
+					add(walrii);
+					if (mute == 0) {
+						var sound = new Audio("https://codehs.com/uploads/63140f32aedb66af880d44225e9abcdd");
+						sound.play();
+					}
+				}
+
+				function move2(e) {
+					x = e.getX();
+					y = e.getY();
+					walriiCursor.setPosition(x -(48 + size/2), y - (48 + size/2));
+					walriiCursor.setSize(size + 100,size + 100);
+					add(walriiCursor);
+				}
+
+				function keyDown(e) {
+					if(e.keyCode == Keyboard.letter('W')){
+						size++;
+					}
+					if(e.keyCode == Keyboard.letter('S')){
+						if (size > -99) {
+							size--;
+						}
+					}
+					if(e.keyCode == Keyboard.letter('X')){
+						removeAll();
+						var walriiCursor = new WebImage("https://codehs.com/uploads/b5b8b7afa11ab5a389e3492a227141cf");
+						var txt = new Text("Click to draw (can get loud, turn down volume)", "10pt Arial");
+						txt.setPosition(0, 20);
+						add(txt);
+						var txt2 = new Text("W/S scale, X clear, M mute (Muted by default)", "10pt Arial");
+						txt2.setPosition(0, 40);
+						add(txt2);
+					}
+					if(e.keyCode == Keyboard.letter('M')){
+						if (mute == 1) {
+							mute = 0;
+						} else {
+							mute = 1;
+						}
+					}
+
+				}
+				
+                if (typeof start === 'function') {
+                    start();
+                }
+            };
+        </script>
+    </body>
+</html>
